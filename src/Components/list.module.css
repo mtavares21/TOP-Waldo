@@ -1,0 +1,19 @@
+.list {
+  flex-wrap: wrap;
+  position: absolute;
+  z-index:1000;
+  width: fit-content;
+  padding: 5px;
+  border: 1px solid black;
+  list-style: none;
+  font-size: 12px;
+  background-color: rgba(250,250,250,0.7);
+}
+.li{
+  width: 100%;
+}
+.input{
+  width: fit-content;
+  background-color: rgba(0,0,0,0);
+  border: 0;
+}

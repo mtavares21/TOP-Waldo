@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+body {
+  background-color: #011627;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.containPlay {
+  position: relative;
+  z-index: 0;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.containPlay img {
+  position: relative;
+  z-index: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.play{
+  visibility: hidden;
   display: flex;
-  flex-direction: column;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 280px;
+  background-color: white;
+  opacity: 0.5;
+  transition: visibility 0.1s;
+}
+.containPlay:hover > .play {
+  visibility: visible;
+}
+
+.play:active >.circle {
+  width: 350px;
+  height: 350px;
+}
+.playIcon{
+  position: absolute;
+  border-top: 80px solid transparent;
+  border-bottom: 80px solid transparent;
+  border-left: 100px solid rgb(41, 40, 40,0.7);
+  margin-left: 25px;
+  z-index:2
+}
+.circle {
+  position: absolute;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  left: 34vw;
+  top:13vw;
+  width: 300px;
+  height: 300px;
+  background: rgba(92, 90, 90, 0.5);
+  border-radius: 50%;
+  z-index:2;
 }
-
-.App-link {
-  color: #61dafb;
+.circle:hover > .playIcon {
+ border-top: 85px solid transparent;
+  border-bottom: 85px solid transparent;
+  border-left: 105px solid rgb(41, 40, 40, 0.7);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.circle:hover {
+  width: 340px;
+  height: 340px;
+}
+.playWrap {
+  position: absolute;
+  left: 1%;
+  margin: 50px;
 }
