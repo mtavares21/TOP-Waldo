@@ -5,9 +5,9 @@ export default function Frame({coord}) {
   return (
     <div
       style={{
-        // Same referential as clientX,clientY, centered
-        top: coord[1]-175 + "px",
-        left: coord[0]-75 + "px",
+        // Same referential as pageX,pageY, centered
+        top: coord[1]-25 + "px",
+        left: coord[0]-15 + "px",
         // Display if coord are given
         display: !!coord.length ? "flex":"none",
         position: "absolute",

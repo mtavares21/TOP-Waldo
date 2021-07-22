@@ -1,57 +1,141 @@
-import { useState } from "react";
+import React from "react";
+import { useReducer, useState, useCallback } from "react";
+import {
+  startServerTimer,
+  stopServerTimer,
+  deleteServerTimer,
+  getServerTimer,
+} from "./data";
+import { v4 as uuidv4 } from "uuid";
 import * as _ from "lodash";
 import "./App.css";
 import Header from "./Components/Header";
-import { getImage, startServerTimer } from "./data";
-import { useEffect, useCallback } from "react/cjs/react.development";
+import { loadImages } from "./data";
+import { useEffect } from "react/cjs/react.development";
 import Playground from "./Components/Playground";
+import Gallery from "./Components/Gallery";
+import ScoreBoard from "./Components/ScoreBoard";
+
+const initialStateImage = {
+  images: [],
+  currImage: null,
+  char: [],
+  charFound: [],
+};
+
+function reducerImage(stateImage, action) {
+  const { images, currImage, char, charFound } = stateImage;
+  if (action.type === "default image") {
+    //Default image and respective
+    return { images, currImage: images[0], char: images[0].char, charFound };
+  } else if (action.type === "add images") {
+    return { images: action.images, currImage, char, charFound: [] };
+  } else if (action.type === "select image") {
+    return {
+      images,
+      currImage: action.image,
+      char: action.image.char,
+      charFound: [],
+    };
+  } else if (action.type === "char found") {
+    //Adds found character and updates char to be found
+    return {
+      images,
+      currImage,
+      char: char.filter((char) => char.name !== action.charFound.name),
+      charFound: charFound.concat(action.charFound),
+    };
+  } else if (action.type === "reset") {
+    return {
+      images,
+      currImage: images[0],
+      char: images[0].char,
+      charFound: [],
+    };
+  } else {
+    throw new Error();
+  }
+}
 
 export default function App() {
-  const [image, setImage] = useState({
-    src:
-      "https://3hwuuuxcz5o651g144s0kw10-wpengine.netdna-ssl.com/wp-content/uploads/2016/07/G3M_Wheres_Waldo.jpg",
-    char: [
-      { name: "Waldo", coord: [986, 187] },
-      { name: "Oldlaw", coord: [115, 661] },
-    ],
-  });
-  // Initial char will be updated when user finds a character
-  let initialChar = _.cloneDeep(image.char);
-  // Current characters names to be found
-  const [char, setChar] = useState(initialChar);
-  // Found characters
-  const [charFound, setCharFound] = useState([]);
   // Timer (on/off)
   const [timer, setTimer] = useState(0);
-  // Get other image
-  function getNewImage(image) {
-    getImage(image).then((doc) => setImage((img) => doc));
+  // Score time
+  const [scoreTime, setScoreTime] = useState(null);
+  // Image reducer
+  const [stateImage, dispatchImage] = useReducer(
+    reducerImage,
+    initialStateImage
+  );
+  const { images, currImage, char, charFound } = stateImage;
+  // Is game over ?
+  const isGameOver = useCallback(
+    () => char.length === 0 && !!charFound.length,
+    [charFound, char]
+  );
+  useEffect(() => {
+    const loadedImages = [];
+    loadImages()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((image) => loadedImages.push(image.data()));
+        dispatchImage({
+          type: "add images",
+          images: _.cloneDeep(loadedImages),
+        });
+        dispatchImage({ type: "default image" });
+      })
+      .catch((error) => console.log(error));
+  }, [dispatchImage]);
+  // Start timer
+  function startTimer(e) {
+    e.stopPropagation();
+    const id = uuidv4();
+    setTimer((prev) => id);
+    startServerTimer(id);
   }
-  const isGameOver = useCallback(() => charFound.length === char.length, [
-    char,
-    charFound,
-  ]);
-
+  // Stop and setScore when game is over
   useEffect(() => {
     if (isGameOver()) {
-      setTimer(0);
+      stopServerTimer(timer).then((e) =>
+        getServerTimer(timer).then((doc) => {
+          const time = doc.stop - doc.start;
+          setScoreTime(Math.round(time * 100) / 100);
+        })
+      );
     }
-  }, [isGameOver]);
+    return () => (isGameOver() ? deleteServerTimer(timer) : null);
+  }, [isGameOver, timer]);
 
+  const handleNewImage = (img) => {
+    dispatchImage({type:"select image", image: img})
+    setTimer(prev=>0)
+  }
   return (
     <div className="App">
       <Header />
+      <Gallery images={images} handleNewImage={handleNewImage} />
       <div className="playWrap">
-        <Playground
-          isGameOver={isGameOver}
-          image={image}
-          setTimer={setTimer}
-          startServerTimer={startServerTimer}
-          charFound={charFound}
-          char={char}
-          setCharFound={setCharFound}
-          timer={timer}
-        />
+        {isGameOver() && !!scoreTime ? (
+          <ScoreBoard
+            time={scoreTime}
+            setTime={setScoreTime}
+            setTimer={setTimer}
+            dispatchImage={dispatchImage}
+            currImage={currImage.name}
+          />
+        ) : null}
+        {!!currImage ? (
+          <Playground
+            isGameOver={isGameOver}
+            setTimer={setTimer}
+            timer={timer}
+            startTimer={startTimer}
+            dispatchImage={dispatchImage}
+            char={char}
+            charFound={charFound}
+            currImage={currImage}
+          />
+        ) : null}
       </div>
     </div>
   );

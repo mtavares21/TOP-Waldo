@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Marker({ coord }) {
   return (
-    <div
+    <div 
       style={{
-        left:coord[0]-95+"px",
-        top:coord[1]-175+"px",
+        left:coord[0]-30+"px",
+        top:coord[1]-30+"px",
         position: "absolute",
         zIndex:"1000",
         margin: "0",

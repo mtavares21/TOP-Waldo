@@ -1,19 +1,32 @@
 body {
   background-color: #011627;
+  width: fit-content;
+  margin:0;
+}
+.App {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .containPlay {
-  position: relative;
-  z-index: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 .containPlay img {
-  position: relative;
-  z-index: 0;
+  position: absolute;
+  width: 1200px;
+  height: 900px;
+  object-fit: contain;
+  object-position: top ;
 }
 .play{
   visibility: hidden;
   display: flex;
-  position: absolute;
   justify-content: center;
   align-items: center;
   width: 280px;
@@ -27,14 +40,14 @@ body {
 }
 
 .play:active >.circle {
-  width: 350px;
-  height: 350px;
+  width: 320px;
+  height: 320px;
 }
 .playIcon{
   position: absolute;
   border-top: 80px solid transparent;
   border-bottom: 80px solid transparent;
-  border-left: 100px solid rgb(41, 40, 40,0.7);
+  border-left: 100px solid rgba(245, 242, 242, 0.8);
   margin-left: 25px;
   z-index:2
 }
@@ -43,25 +56,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 34vw;
-  top:13vw;
+  margin-top:190px;
   width: 300px;
   height: 300px;
-  background: rgba(92, 90, 90, 0.5);
+  background: rgba(241, 240, 240, 0.5);
   border-radius: 50%;
   z-index:2;
 }
 .circle:hover > .playIcon {
- border-top: 85px solid transparent;
-  border-bottom: 85px solid transparent;
-  border-left: 105px solid rgb(41, 40, 40, 0.7);
+ border-top: 90px solid transparent;
+  border-bottom: 90px solid transparent;
+  border-left: 110px solid rgba(245, 242, 242, 0.7);
 }
 .circle:hover {
   width: 340px;
   height: 340px;
 }
 .playWrap {
-  position: absolute;
-  left: 1%;
   margin: 50px;
+  width: 100%;
 }

@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 340px;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  margin-top:-50px;
+  left: 50%;
+  margin-left: -170px;
+  z-index: 1001;
+  
+}

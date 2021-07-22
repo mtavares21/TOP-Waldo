@@ -1,64 +1,66 @@
 import React from "react";
-import { useState, useCallback, useEffect } from "react/cjs/react.development";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react/cjs/react.development";
 import Play from "./Play";
 import Image from "./Image";
 import Frame from "./Frame";
 import List from "./List";
 import Marker from "./Marker";
+
 export default function Playground({
+  currImage,
   isGameOver,
-  image,
-  setTimer,
-  startServerTimer,
   charFound,
   char,
-  setCharFound,
+  dispatchImage,
+  setTimer,
   timer,
+  startTimer,
 }) {
   // Current frame coordinates
-  const [coord, setCoord] = useState([]);
+  const [coord, setCoord] = useState({ page: [], layer: [] });
 
   const handleImageClick = (e) => {
-    e.stopPropagation();
     return isGameOver()
       ? alert("You already found everybody! Congrats")
-      : setCoord((prev) => [e.pageX, e.pageY]);
+      : setCoord((prev) => ({
+          page: [e.pageX, e.pageY],
+          layer: [e.nativeEvent.layerX, e.nativeEvent.layerY],
+        }));
   };
-
-  // Start timer
-  function startTimer() {
-    const id = uuidv4();
-    setTimer((prev) => id);
-    startServerTimer(id);
-  }
   // Render marker on found characters
   const renderMarker = () => {
     return (
       <div>
         {charFound.map((item) => (
-          <Marker coord={item.coord} />
+          <Marker key={item.pageCoord} coord={item.pageCoord} />
         ))}
       </div>
     );
   };
-
   return (
-    <div>
-      <Frame coord={coord} />
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      <Frame coord={coord.page} />
       <List
         coord={coord}
         setCoord={setCoord}
-        char={char}
         setTimer={setTimer}
-        setCharFound={setCharFound}
         isGameOver={isGameOver}
         timer={timer}
-        image={image}
+        currImage={currImage}
+        dispatchImage={dispatchImage}
+        char={char}
+        charFound={charFound}
       />
       {!!charFound.length ? renderMarker() : null}
       <div className="containPlay">
-        <Image image={image} onClick={!!timer ? handleImageClick : null} />
+        <Image image={currImage} onClick={!!timer ? handleImageClick : null} />
         <Play onClick={startTimer} show={!!timer} />
       </div>
     </div>
