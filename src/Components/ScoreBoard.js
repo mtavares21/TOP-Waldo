@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useState, useEffect, useRef } from "react/cjs/react.development";
+import { useState, useEffect, useRef } from "react";
 import { getServerScores, setServerScore } from "../data";
 import styles from "./scoreBoard.module.css";
 import ScoreForm from "./ScoreForm";

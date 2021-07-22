@@ -1,5 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import image2 from "./image2.jpeg"
+import image5 from "./image5.jpeg"
+import image6 from "./image6.jpeg"
 
 const firebaseConfig = {
   apiKey: "AIzaSyCDdjsr3F6WO5DWqkRnONMN59AZxn_m8WM",
@@ -28,8 +31,7 @@ setServerImage("image1",{
 
 setServerImage("image2",{
   name:"image2",
-    src:
-      "https://i.imgur.com/4B42MkD.jpeg",
+    src:image2,
     char: [
       { name: "Waldo", coord: [518, 563]},
       { name: "Oldlaw", coord: [709, 709]},
@@ -58,8 +60,7 @@ setServerImage("image3", {
   })
   setServerImage("image5", {
     name:"image5",
-    src:
-      "https://i.imgur.com/e8gNYDI.jpeg",
+    src: image5,
     char: [
       { name: "Oldlaw", coord: [449, 72] },
       { name: "Wizard Whitebard", coord: [1147, 184] },
@@ -67,9 +68,8 @@ setServerImage("image3", {
     ],
   })
    setServerImage("image6", {
-     name:"image1",
-    src:
-      "https://i.imgur.com/btsRJjC.jpeg",
+    name:"image1",
+    src: image6,
     char: [
       { name: "Waldo", coord: [201, 656] },
       { name: "Wizard Whitebard", coord: [347, 106]},

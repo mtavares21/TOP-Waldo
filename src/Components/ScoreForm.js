@@ -18,7 +18,7 @@ export default function ScoreForm({ show, handleNewScore, time }) {
         >
           Submit
         </button>
-        <h1>{time}</h1>
+        <h1>{ typeof(time)===Number ? new Date( time * 1000).toISOString().substr(11, 8):null}</h1>
       </div>
     </form>
   );

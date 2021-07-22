@@ -1,5 +1,5 @@
 import React from "react";
-import { useReducer, useState, useCallback } from "react";
+import { useReducer, useState, useCallback, useEffect } from "react";
 import {
   startServerTimer,
   stopServerTimer,
@@ -11,7 +11,6 @@ import * as _ from "lodash";
 import "./App.css";
 import Header from "./Components/Header";
 import { loadImages } from "./data";
-import { useEffect } from "react/cjs/react.development";
 import Playground from "./Components/Playground";
 import Gallery from "./Components/Gallery";
 import ScoreBoard from "./Components/ScoreBoard";

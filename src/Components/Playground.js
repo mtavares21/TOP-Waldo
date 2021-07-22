@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import Play from "./Play";
 import Image from "./Image";
 import Frame from "./Frame";
@@ -21,7 +21,7 @@ export default function Playground({
 
   const handleImageClick = (e) => {
     return isGameOver()
-      ? alert("You already found everybody! Congrats")
+      ? null
       : setCoord((prev) => ({
           page: [e.pageX, e.pageY],
           layer: [e.nativeEvent.layerX, e.nativeEvent.layerY],

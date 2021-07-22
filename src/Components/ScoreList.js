@@ -30,7 +30,7 @@ export default function ScoreList({scores}) {
         <h2 style={{ margin: 0 }}> Time </h2>
         <ol style={{ listStyle: "none", padding: 0, textAlign: "center" }}>
           {scores.map((score, index) => (
-            <li key={index}>{score.time}</li>
+            <li key={index}>{new Date( score.time * 1000).toISOString().substr(11, 8)}</li>
           ))}
         </ol>
       </div>
