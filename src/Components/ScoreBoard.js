@@ -69,7 +69,7 @@ export default function ScoreBoard({
     <div className={styles.wrapper}>
       <div
         ref={refContainer}
-        style={{ width: "340px", backgroundColor: "white" }}
+        style={{ width: "400px", backgroundColor: "white" }}
       >
         <ScoreHeader />
         <ScoreForm
