@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/TOP-Waldo/static/css/main.a3f8b749.chunk.css",
-    "main.js": "/TOP-Waldo/static/js/main.b99048a3.chunk.js",
-    "main.js.map": "/TOP-Waldo/static/js/main.b99048a3.chunk.js.map",
+    "main.css": "/TOP-Waldo/static/css/main.ae8d0075.chunk.css",
+    "main.js": "/TOP-Waldo/static/js/main.5088eaf9.chunk.js",
+    "main.js.map": "/TOP-Waldo/static/js/main.5088eaf9.chunk.js.map",
     "runtime-main.js": "/TOP-Waldo/static/js/runtime-main.d57af93e.js",
     "runtime-main.js.map": "/TOP-Waldo/static/js/runtime-main.d57af93e.js.map",
     "static/js/2.8a21e29c.chunk.js": "/TOP-Waldo/static/js/2.8a21e29c.chunk.js",
     "static/js/2.8a21e29c.chunk.js.map": "/TOP-Waldo/static/js/2.8a21e29c.chunk.js.map",
     "index.html": "/TOP-Waldo/index.html",
-    "static/css/main.a3f8b749.chunk.css.map": "/TOP-Waldo/static/css/main.a3f8b749.chunk.css.map",
+    "static/css/main.ae8d0075.chunk.css.map": "/TOP-Waldo/static/css/main.ae8d0075.chunk.css.map",
     "static/js/2.8a21e29c.chunk.js.LICENSE.txt": "/TOP-Waldo/static/js/2.8a21e29c.chunk.js.LICENSE.txt",
     "static/media/image2.6fc61e4f.jpeg": "/TOP-Waldo/static/media/image2.6fc61e4f.jpeg",
     "static/media/image5.64b04029.jpeg": "/TOP-Waldo/static/media/image5.64b04029.jpeg",
@@ -17,7 +17,7 @@
   "entrypoints": [
     "static/js/runtime-main.d57af93e.js",
     "static/js/2.8a21e29c.chunk.js",
-    "static/css/main.a3f8b749.chunk.css",
-    "static/js/main.b99048a3.chunk.js"
+    "static/css/main.ae8d0075.chunk.css",
+    "static/js/main.5088eaf9.chunk.js"
   ]
 }
